@@ -1,6 +1,6 @@
 # Diseño a la gorra
 
-## Episodio 1
+## Episodio 1 - Qué es Diseñar y Cómo hacer que un diseño nos "Enseñe"
 
 Algunas definiciones (marcos conceptuales):
 1. Diseño es la *definición* que usamos para construir
@@ -27,7 +27,7 @@ Ideas principales:
 * Un objeto debe *representar* el ente del dominio de problema *desde el momento en que existe*
 * Un objeto debe "enseñar" de manera explícita *qué necesita para representar* ese ente
 
-## Episodio 2
+## Episodio 2 - Objetos Válidos
 
 Heurística importante tomada del segundo episodio de diseño a la gorra @10pines
 3. Crear objetos válidos
@@ -35,3 +35,11 @@ Heurística importante tomada del segundo episodio de diseño a la gorra @10pine
 Conclusiones:
 1. Un objeto debe *representar* el ente de dominio *de manera válida desde el momento en que existe*
 2. Un objeto debe "enseñar" de manera explícita *qué necesita para representar* ese ente y fallar si se le crea incorrectamente*
+
+## Episodio 3 - Modelar los "Conjuntos de Objetos"
+
+¡Los objetos no viven aislados!
+Heurísticas:
+4. Usar una metáfora para "mappear" el problema (no usar nombres de patrones en las clases)
+5. Modelar los "conjuntos" de objetos (Distintas implementaciones del "conjunto")
+6. Usar updates atómicos
