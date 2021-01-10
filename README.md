@@ -362,6 +362,8 @@ Conclusiones - Diseño:
 * Se expone la password a objetos externos, que además es publica
 * No hay clases "service"
 
+![Screenshot](/Episodio 8 - 1.jpg)
+
 Conclusiones - Tests:
 * Test de Excepciones sin aserciones de que no sucedió lo que no tenia que pasar
 * SetUp muy grande (no es solo setup, hace exercise)
