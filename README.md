@@ -152,3 +152,156 @@ Aunque si implica diseños más desacoplados
 Es importante poder extender clases para no caer en "soluciones estructuradas"
 
 Extender clases nos permite que sus instancias cumplan *distintos roles según el contexto*
+
+## Episodio 7 - Todo lo que siempre quisiste saber sobre los Tests
+
+Tipos de tests:
+
+- las definiciones varían según el autor
+- hay definiciones difusas, contradictorias, ambiguas, etc
+- el problema es que hay distintas maneras de categorizar los tests y generalmente se piensa en una sola
+
+Categorías:
+
+- de acuerdo al alcance a nivel "código"
+- de acuerdo a qué testean
+- de acuerdo a como están implementados
+- de acuerdo a como ejecutan
+- de acuerdo a como se comportan
+- de acuerdo a quien lo hace
+
+De acuerdo al alcance a nivel "código"
+
+- test unitarios (solitarios)
+- tests de componentes
+- tests end to end/tests de sistema/test de integración (test sociales)
+
+Tests unitarios
+
+Def 1: verifican el comportamiento de una unidad
+Qué es una unidad? Un método? Una clase? Un "componente"?
+Def 2: tests que ejecutan en menos de 10ms
+Relacionada con la funcionalidad y no con el alcance de código
+- de acuerdo a cómo se hace
+
+Últimamente se los implementa simulando todo lo que la "unidad" bajo test utiliza, por eso también se los llama test solitarios
+
+Ventajas:
+
+- cambios en dependencias no impactan en el resultado del test
+- "chicos"
+
+Desventajas:
+
+- cambios en dependencias no impactan en el resultado del test
+- están acoplados al diseño, si el diseño cambia los tests se ven impactados
+- gran confusión con TDD debido al nombre del framework xUnit
+- obligan a "simular" todo aquellos que no es "la unidad testeada"
+- más orientados a la "implementación" que a la funcionalidad
+
+Tests de componentes
+
+- verifican el correcto funcionamiento de un "componente"
+
+Qué es un componente? Una clase? Un módulo? Un "java Bean"?
+- mismas ventajas y desventajas que los tests unitarios
+
+Tests de integración
+
+- verifican que "partes" implementadas independiente funcionen "conectadas"
+- también llamados "system test" o "end to end tests" o "tests sociales"
+
+De acuerdo al alcance a nivel de "código" - conclusión: según mi opinión, la categoría menos interesante porque tiene que ver con el cómo y no con el qué
+
+De acuerdo a qué testean
+
+- Tests funcionales
+- Tests no funcionales (de performance, de escalabilidad, de seguridad, de usabilidad)
+
+Tests funcionales
+
+- verifican una "funcionalidad" sin importar el alcance a nivel de "código" (puede abarcar varios métodos, clases, etc)
+
+Ventajas:
+
+- pensados desde el punto de vista funcional y no implementativo
+- mas relacionados con las "reglas de negocio"
+
+Desventajas
+
+-cambios en alguna dependencia puede fallar varios tests
+
+Pueden ser unitarios, de integración, etc
+
+De acuerdo a cómo están implementados
+
+- test de caja negra: "desconocen" la implementación de lo que testean
+- de caja blanca: acoplados a la implementación de lo que testean
+
+Paradoja: cuando hacemos TDD debemos escribir tests de caja negra, sin embargo conocemos la implementación
+
+De acuerdo a cómo ejecutan
+
+- test aislados (no hay dependencia entre los tests, no comparten "datos de prueba", permiten la paralización de la ejecución)
+- test secuenciales (deben ser ejecutados en cierta secuencia, el resultado de un test impacta en la ejecución de otro)
+- test compartidos (test con "datos de prueba" compartidos, ej. La misma base de datos)
+
+De acuerdo a cómo se comportan
+
+- tests determinísticos (siempre dan el mismo resultado)
+- tests erráticos (a veces funcionan, a veces no funcionan, no cumplen la regla de "el test debe estar en control de todo", muy común que suceda con tests compartidos)
+- tests frágiles (fallan al cambiar la implementación de lo que se testea, no al cambiar el qué de lo que testean. Ejemplo: tests con mocks, tests de ui)
+- tests "insoportables" (tests que tardan mucho)
+
+De acuerdo a quién lo hace
+
+- test de programador
+
+Son los tests escritos por los programadores y tiene por objetivo "ayudar" al programador en su proceso de desarrollo.
+
+Pueden ser funcionales, no funcionales, unitarios, de integración, desarrollados haciendo TDD o testing, etc
+
+- test de QA
+
+Son los tests creados por gente que no tiene por objetivo principal programar
+
+De acuerdo a cómo se hacen
+
+- tests automatizados (tests programados, tests récord y play)
+- tests manuales (pre-definidos, exploratorios)
+
+Tipo de Tests
+
+- funcionales
+- de programador
+- automatizados, programados
+- preferiblemente de caja negra
+- preferiblemente determinísticos
+- preferiblemente aislados
+- preferiblemente "sociales"
+
+Características:
+- deben correr rápido (< 10 ms x test)
+- deben tener las mismas características a nivel diseño, que cualquier otra pieza de software (aunque a veces es conveniente repetir el "setup", más aún si se puede reiniciar el test y se está trabajando con objetos mutables)
+
+Estructura de los tests
+
+- setup (creación de los objetos que se utilizarán como "datos de prueba" durante el test
+- exercise (ejercita la funcionalidad específica que se está testeando. Determina QUÉ se está testeando
+- assert (verifica que los resultados sean los esperados)
+
+Datos de prueba != Casos de prueba
+
+Dato de prueba: ejemplos concretos que "definen" un caso de prueba
+
+Caso de prueba: generalización que incluye los datos de prueba
+
+Lo que inicialmente nos parece un caso de prueba puede convertirse en dato de prueba al generalizar la solución
+
+... por eso conviene esperar para nombrar los tests
+
+"Inducción incorrecta"
+
+Inducción: pasa para 1, pasa para N, pasa para N+1
+
+Inducción incorrecta: pasa para 1, pasa para 2, pasa para N
