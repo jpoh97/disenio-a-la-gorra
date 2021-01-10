@@ -39,6 +39,7 @@ Conclusiones:
 ## Episodio 3 - Modelar los "Conjuntos de Objetos"
 
 ¡Los objetos no viven aislados!
+
 Heurísticas:
 4. Usar una metáfora para "mappear" el problema (no usar nombres de patrones en las clases)
 5. Modelar los "conjuntos" de objetos (Distintas implementaciones del "conjunto")
