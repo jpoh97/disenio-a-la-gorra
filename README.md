@@ -598,3 +598,47 @@ Configurar un framework es un trabajo repetitivo. Normalmente la mayor incertidu
 A la final es lo que genera mayor valor al cliente. Es lo más cambiante. Es fácil perderse cuando se sigue esta técnica outside-in ya que es fácil desviarse por otras ramas, para esto es importante tener un trace bullet y no perder el foco.
 
 La tecnica a escoger, sea outside-in (London) o inside-out (Chicago) o middle-out (Buenos Aires) depende de la necesidad de negocio particular. Que nos interesa más: el negocio, la base de datos, el frontend? Desde allí debemos partir
+
+## Episodio 14 - Buenos Aires vs. (London vs. Chicago) - Parte 6
+
+Con TDD la idea es estar desacoplado de recursos externos. No tiene sentido aplicar la persistencia, es mejor tener implementaciones en memoria para los tests.
+
+En TDD, se debe correr los tests a medida que hago refactors, pero cuando estos refactors son automatizados no es necesario correrlos.
+
+Cuando realizamos mucho copy - paste es momento de crear nuevas abstracciones.
+
+Cuando se necesita parametrizar un llamado a un código, se puede hacer usando diferentes mensajes.
+
+Nunca hay que hacer refactors con tests fallando!
+
+Cuando se hacen refactors que no son automatizados, se deben correr los tests para verificar que todo siga funcionando.
+
+Por medio de refactors automatizados podemos agregar semántica, sacar código repetido y hacer mas entendible el código (tests y el modelo).
+
+Cuando tenemos un decorator que repite código (todos los métodos tienen una misma lógica pero solo cambia el llamado o solo forwardea)
+
+Se puede tener una lista de comandos que ejecutan las acciones.
+
+Cuando se usa un method object, todas las variables locales al método tienen que pasar a ser variables de instancia de la clase. Es uno de los objetivos del method object.
+
+Cuando estamos interfaceando con el mundo exterior que recibimos cosas que no son objetos (por ejemplo Jsons), en esos casos voy a necesitar tener cadenas de ifs. Necesito comparar lo que viene del mundo exterior para tomar una decisión.
+
+Se podría reemplazar por polimorfismo, pero no siempre es la mejor opción.
+
+Cuando uno aprende a encadenar refactorings, uno puede hacer grandes cambios de diseño. El no usarlo de esta forma es un handicap muy grande. Nos sacamos el mejor provecho.
+
+InvocationHandler es una interfaz en Java que podemos implementar cuando queremos que un objeto se comporte como un proxy dinámico. Se implementa el método invoke que recibe el Method (que se debería llamar Message) que se le esta enviando al objeto.
+
+Este invoke puede forwadear el mensaje en el caso de que no sepa que responder. Te permite responder dinámicamente un mensaje que un objeto no sabe responder. Si aparece un nuevo mensaje no tengo que hacer nada, automáticamente el proxy sabe que debe invocar el invoke
+
+Y este puede forwardear el mensaje.
+
+En este episodio vimos como hacer varios cambios de diseño a través de refactoring automatizado, como hacer TDD con recursos externos y como sacar cierto código repetido vía metaprogramación que lo metimos por medio de refactors automatizados.
+
+Cuando uno empieza a hacer cambios de diseño encadenando refactorings, empieza a entender las dependencias que existen entre los objetos que tenemos en nuestro modelo de una manera distinta a cuando lo hacemos manualmente.
+
+Empieza a darse cuenta de ciertos acoplamientos que antes no conocía. Se entiende porque hay que hacer ciertos cambios en cierto orden. Se vuelve evidente las relaciones entre los objetos.
+
+Los refactorings automatizados explican el proceso por el cual piensa un programador. Es automatizar el proceso de pensamiento del programador y te ordena tu proceso de cambio.
+
+TDD te ordena tu proceso de desarrollo, el refactoring te ordena tu proceso de cambio.
