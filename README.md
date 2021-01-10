@@ -546,3 +546,15 @@ Al realizar modificaciones, podemos empezar por los tests de más arriba, más a
 Empezar por el medio del árbol seria lo mejor de los 2 mundos (se evitan los 2 problemas anteriores).
 
 La manera en que lo hace Mancuso es útil cuando sabes lo que vas a hacer desde antes. Esto contradice un poco el objetivo de hacer TDD de descubrir a medida que vamos haciendo
+
+## Episodio 12 - Buenos Aires vs. (London vs. Chicago) - Parte 4B
+
+Ser cuidadosos de los tests que brindan una falsa sensación de seguridad, que pasan aun cuando el código no funciona correctamente. Pasa mucho cuando se utilizan mocks y no se prueba las colaboraciones
+
+Lo difícil de realizar cambios en un sistema legacy es que no sabes todo lo que impacta el cambio. Si se puede mantener el cambio lo mas pequeño posible, entonces lo hacemos de manera más segura
+
+Los tests de programadores son los tests que escribimos como programadores haciendo TDD. Los tests de aceptación son los que debería escribir un usuario y van muy por arriba del árbol de ejecución y que debería testear todo una funcionalidad
+
+Son tests mas lentos y que abarcan mas, y que por lo general no lo escribe un programador. Tienen como objetivo asegurarse que la funcionalidad desde el punto de vista del usuario es correcta. 
+
+El objetivo de los tests de programador es asegurarse que el código funciona
