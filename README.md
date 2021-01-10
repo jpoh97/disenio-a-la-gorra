@@ -389,6 +389,8 @@ A nivel de arquitectura: no empezar por las interfaces para evitar tener lógica
 
 Es normal tener código que solo se utiliza en los tests, ya que estos utilizan el modelo al igual que cualquier interfaz
 
+![](https://github.com/jpoh97/disenio-a-la-gorra/blob/main/screenshots/Episodio%208%20-%202.jpg)
+
 No importa si este código no se usa en producción, actualmente no es algo critico esa memoria de mas. Los test son nuestros primeros usuarios y si necesitan algún código se debe agregar
 
 Lo que no se debe hacer es cambiar métodos privados a públicos para acceder desde el test
@@ -403,6 +405,8 @@ Ser consiente desde el punto de vista de los baby steps en dar los pasos mas que
 Crear copias de colecciones al retornar para asegurar encapsulamiento (no te lo modifican desde afuera)
 
 Usar TDD como mecanismo de modelado del problema, pero también lo puedes usar como mecanismo de implementación de la api (usar TDD para todo)
+
+![](https://github.com/jpoh97/disenio-a-la-gorra/blob/main/screenshots/Episodio%208%20-%203.jpg)
 
 Respecto la metodología
 * Diseño basado en el negocio
