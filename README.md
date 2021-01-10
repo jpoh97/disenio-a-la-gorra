@@ -1,6 +1,6 @@
 # Diseño a la gorra
 
-## Episodio 1 
+## Episodio 1
 
 Algunas definiciones (marcos conceptuales):
 1. Diseño es la *definición* que usamos para construir
@@ -26,3 +26,12 @@ Ideas principales:
 * Los diseños deben *enseñar* lo que representan
 * Un objeto debe *representar* el ente del dominio de problema *desde el momento en que existe*
 * Un objeto debe "enseñar" de manera explícita *qué necesita para representar* ese ente
+
+## Episodio 2
+
+Heurística importante tomada del segundo episodio de diseño a la gorra @10pines
+3. Crear objetos válidos
+
+Conclusiones:
+1. Un objeto debe *representar* el ente de dominio *de manera válida desde el momento en que existe*
+2. Un objeto debe "enseñar" de manera explícita *qué necesita para representar* ese ente y fallar si se le crea incorrectamente*
