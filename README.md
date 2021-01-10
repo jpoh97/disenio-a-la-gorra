@@ -518,3 +518,31 @@ No armamos nuestro esquema de trabajo en base a separaciones de subsistemas, cla
 El proceso seguido es de cierta forma un inside - out, pero un poco distinto a lo propuesto por bob martin. Importante resaltar las diferencias a nivel de diseño en cada propuesta. Es algo que se debe tomar en cuenta. No solo se analiza la forma del proceso, también el resultado
 
 A veces se necesita escuchar algo que ya te dijeron pero de otra forma para capturar la idea. Es algo que genera personas como Alan Kay.
+
+## Episodio 11 - Buenos Aires vs. (London vs. Chicago) - Parte 4
+
+Se refactoriza el código para retornar una custom exception en vez de Runtime ya que esta ultima debería retornar un status 500 (error de servidor)
+
+Son errores de problema funcional, de como se esta usando el sistema y no errores de programación
+
+* Si tenemos un map y adentro un if, se puede aplicar un filter primero
+* y -> (x -> x).apply(y) == x -> x (es equivalente al closure de adentro)
+* (y -> f(y)).apply(z) == f(z)
+
+Este ultimo es equivalente a aplicar el closure.
+
+Todo esto es gracias a pensar mas de forma funcional y no imperativa.
+
+Gracias a que los test son sociables (no se mockea), no tenemos que modificar los tests al realizar este tipo de refactors
+
+Estos son los resultados de como se comporta las distintas implementaciones de TDD respecto a los errores
+
+Algunos errores en chicago se deben a que el proceso es guiado por la interfaz y no por la funcionalidad
+
+![](https://github.com/jpoh97/disenio-a-la-gorra/blob/main/screenshots/Episodio%2011%20-%201.jpg)
+
+Al realizar modificaciones, podemos empezar por los tests de más arriba, más abajo y del medio. Los de mas abajo no agregan valor porque estaríamos testeando el agregar un getter. Los de más arriba son más complejos porque se debe modificar demasiadas cosas para que pase un test
+
+Empezar por el medio del árbol seria lo mejor de los 2 mundos (se evitan los 2 problemas anteriores).
+
+La manera en que lo hace Mancuso es útil cuando sabes lo que vas a hacer desde antes. Esto contradice un poco el objetivo de hacer TDD de descubrir a medida que vamos haciendo
