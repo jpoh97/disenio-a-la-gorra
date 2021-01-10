@@ -486,3 +486,35 @@ A veces se necesitan cosas que no hacen parte del tema funcional de un sistema (
 A veces es mejor encapsular cierto código en vez de retornar un valor, para solucionar un problema común en múltiples partes
 
 El Optional de java es propenso a errores también
+
+## Episodio 10 - Buenos Aires vs. (London vs. Chicago) - Parte 3
+
+El id solo debería responder si es igual a otro.
+
+2 opciones para crear un id: Lo haces en tu objeto de dominio, lo delegas a la interfaz o ids por sesión (va en contra de rest pero es mas seguro)
+
+La opción mas aconsejable es dejar a cargo a la interfaz para no ensuciar mi modelo con un problema de la interfaz Rest. No todas las interfaces van a necesitar un id.
+
+Esta bien si se testea múltiples veces un método desde otro objeto o el mismo. No nos debemos preocupar por testear de mas, es algo que hacemos todo el tiempo. No debería ser diferente si son clases propias o del lenguaje/framework.
+
+Los objetos deben colaborar con otros para hacer cosas.
+
+Desde una interfaz rest puedo testear algo de negocio y verificar que me retorne un código http. Es algo que no he testeado hasta el momento. No importa si este test vuelve a probar la lógica de negocio
+
+Un test puede incluir a los otros y agregar algo más.
+
+Todo aquello que yo no pueda controlar desde el test, lo debo de alguna manera controlar simulándolo
+
+Ciertas cosas que pensamos como natural (hacer un LocalDateTime.now()), no nos damos cuenta que nos acoplamos a una única manera de obtener la hora lo cual no es valioso en ciertos casos (usar un reloj para obtener la hora que se inyecta al objeto)
+
+Hay cosas que no son del dominio de negocio, son del dominio computacional del sistema (i.e. un usuario en un sistema bancario).
+
+Cuando hablamos de negocio nos referimos a la parte funcional y también a lo no funcional (i.e. users) que son requisitos para hacer un buen sistema
+
+Y que también son un problema en si mismo y lo debemos resolver.
+
+No armamos nuestro esquema de trabajo en base a separaciones de subsistemas, clases o paquetes, sino a nivel funcional. Esa funcionalidad puede tocar varios subsistemas
+
+El proceso seguido es de cierta forma un inside - out, pero un poco distinto a lo propuesto por bob martin. Importante resaltar las diferencias a nivel de diseño en cada propuesta. Es algo que se debe tomar en cuenta. No solo se analiza la forma del proceso, también el resultado
+
+A veces se necesita escuchar algo que ya te dijeron pero de otra forma para capturar la idea. Es algo que genera personas como Alan Kay.
