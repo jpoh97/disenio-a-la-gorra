@@ -96,3 +96,59 @@ Características de los closures:
 
 Código repetido significa que nos falta una abstracción
 
+## Episodio 6 - TDD y Roles de Clases
+
+Simplicidad de smalltalk: todo "bloque de código" es un closure
+
+TDD es mucho más que tests que se escriben primero y hay que hacer pasar después
+
+¿Qué es TDD?
+
+Técnica de desarrollo basada en características del aprendizaje
+* Iterativa e incremental
+* Basada en Feedback Inmediato
+
+Side-Effect:
+* Recuerda todo lo aprendido
+* Y permite asegurarnos de no haber "desaprendido"
+
+Incluye análisis, diseño, programación y testing
+
+¿Cómo se hace TDD?
+
+1. Escribir un test
+* Debe ser el más sencillo que se nos ocurra
+* Debe fallar al correrlo
+2. Correr todos los tests
+* Implementar la solución más simple que haga pasar el/los tests
+3. Reflexionó - ¿Se puede mejorar el código?
+* Si->Refactorizar. GOTO 2
+* No->GOTO 1
+
+El *tiempo* que tardó en *cada paso* de TDD, es un indicio de qué tan bien estoy realizando la técnica
+
+Los test unitarios están "acoplados" al diseño (mejor usar sociable tests)
+
+Puedo verificar qué tan bien hice los tests usando mutation testing (por lo menos de manera manual)
+
+TDD hace que los *programadores* semana los *primeros usuarios* del sistema que desarrollan
+
+La culpa no es de TDD ¡Estamos "sufriendo" nuestros diseños!
+
+Un programador no es buen programador si *no sabe testear*
+
+TDD *jerarquizó* el testing
+
+TDD hace *explícito* todos los "tests" que corremos en nuestra cabeza
+
+TDD nos da *seguridad* al momento de refactorizar (feedback rápido)
+
+Evita que el sistema se convierta en un sistema legacy (aquel que tengo miedo de modificar)
+
+TDD *no* implica *buen diseño*
+
+Aunque si implica diseños más desacoplados
+
+Es importante poder extender clases para no caer en "soluciones estructuradas"
+
+Extender clases nos permite que sus instancias cumplan *distintos roles según el contexto*
