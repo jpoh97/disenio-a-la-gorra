@@ -420,3 +420,69 @@ Respecto la metodología
 Es muy fácil criticar, es muy difícil hacer. Para los programadores es muy fácil criticar el código hecho por otras personas porque no conocemos el contexto
 
 La critica objetiva no existe, uno critica siempre desde lo subjetivo. Lo importante es que esa subjetividad se construya con tiempo, experiencia, estudio... es una subjetividad entrenada
+
+## Episodio 09 - Buenos Aires vs. (London vs. Chicago) - Parte 2
+
+![](https://github.com/jpoh97/disenio-a-la-gorra/blob/main/screenshots/Episodio%209%20-%201.jpg)
+
+Es mejor que los mensajes sean en positivo y no en negativo
+
+Donald Knuth: Premature optimization is the root of all evil
+
+Una manera sencilla de ver si un caso de prueba esta siendo testeado es retornando un valor
+
+Esta bien tener redundancia cuando se esta testeando para asegurarse que nada cambie en el modelo (constantes por ejemplo)
+
+Usar la clase Collections para crear colecciones inmutables
+
+Lo importante de TDD no es testear los datos, es testear la funcionalidad
+
+Debe existir un limite de cuantos datos voy a testear. Ser cuidadoso con la inducción incorrecta. Ya es un problema de datos y no de lógica
+
+Hay objetos específicos para los problemas tecnológicos, un objeto de dominio debería porque conocer de tecnología
+
+No es bueno empezar a testear por la raíz del árbol, ya que todo lo que testeamos para los objetos inferiores los terminamos testeando desde la raíz y tendríamos tests mas largos y pesados. Es mas recomendable empezar por el medio
+
+A medida que se va avanzando se da cuenta que probar la consistencia de un objeto puede requerir varias aserciones
+
+Eso de "no conviene implementar código que solo usan los tests", es algo temporal, puede suceder que después lo necesites en cualquier otro contexto
+
+Todo lo que tiene que ver concurrencia, escalabilidad, performance, etc. son problemas que no se resuelven con TDD. Estamos pensando en tecnología perfecta
+
+No nos debemos preocupar por resolver problemas que aun no surgen, más cuando impacta el diseño actual que tratamos de hacer funcional con problemas no funcionales. Esto por hacer optimizaciones tempranas
+
+Esto para evitar decisiones de diseño tempranas que quizá no sean las mejores cuando tenes el big picture (se ve todo el sistema)
+
+Hacer abstracciones tempranas no es bueno a nivel de diseño porque después es muy difícil sacarlas de la cabeza
+
+Entre mas podamos aplazar ese tipo de decisiones de diseño no funcionales es mejor. Y cuando se haga, debemos realizar testing para verificar que funcione correctamente
+
+Como programadores somos observadores de un dominio central que es el de negocio, pero al mismo tiempo tenemos dominios periféricos (persistencia, concurrencia, distribución, etc).  
+
+Puedo resolver cada problema de dominio con objetos que comparten mensajes
+
+Voy a tener objetos preocupados por la concurrencia, otros por la persistencia y los objetos del dominio de negocio. Lo interesante es que cada uno juegue su juego y que sean cohesivos
+
+Nos preocupamos mas por el dominio tecnológico porque es el que mas conocemos. Nosotros sabemos mas de tecnología que de finanzas, salud, etc.
+
+Son distintos dominios de conocimientos. Ninguno es más importante, están al mismo nivel
+
+A la final se resuelve cada uno por su lado y luego vemos como colaboran entre ellos (los objetos)
+
+Quizá es exagerado y en algunos casos no es fácil despegarse del tema tecnológico, pero es lo ideal (tecnología perfecta)
+
+La etapa 3 (refactorización) no es obligatoria, no es necesario hacerlo todo el tiempo. Hay momentos donde conviene aplicarla y momentos en que no. Si la aplicas muy temprano quizá tus abstracciones queden limitadas a los casos que has visto...
+
+Mientras que si las aplicamos mas tardes, pueden aparecer mas casos y realizar abstracciones mas interesantes
+
+Alan Kay: Las cosas se repiensan y se rehacen. Esto es software
+
+El test debe estar en control de todo. Cuando testeamos concurrencia, debemos buscar ese control
+
+Independiente de si estas usando TDD o no. Estos tests de concurrencia son mas complejos. Por eso nos preocupamos primero por los tests funcionales y luego hacemos este tipo de test (ya no es TDD, es testing)
+
+A veces se necesitan cosas que no hacen parte del tema funcional de un sistema (ejemplo: usuarios).
+
+A veces es mejor encapsular cierto código en vez de retornar un valor, para solucionar un problema común en múltiples partes
+
+El Optional de java es propenso a errores también
