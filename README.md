@@ -80,3 +80,19 @@ Leng. Dinámica tipado:
 
 Leng. Estáticamente tipado:
 1. Optional y a arreglar todo!
+
+## Episodio 5 - Código Repetido e Historia de los Closures
+
+Los lenguajes de programación representan el estado de conocimiento de aquellos que los crearon... Cómo cualquier modelo/sistema.
+Debemos ir más allá del lenguaje de programación y entender que significa hacer un modelo computable
+
+Características de los closures:
+
+1. No tienen nombre
+2. Bindean al contexto de ejecución donde se los crea
+3. Full closure: también bindean el return (non-local return. Solo Smalltalk y Ruby)
+4. La sintaxis de uso debe ser sencilla
+5. Uso principal: parametrizar "código"
+
+Código repetido significa que nos falta una abstracción
+
