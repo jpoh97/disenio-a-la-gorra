@@ -642,3 +642,49 @@ Empieza a darse cuenta de ciertos acoplamientos que antes no conocía. Se entien
 Los refactorings automatizados explican el proceso por el cual piensa un programador. Es automatizar el proceso de pensamiento del programador y te ordena tu proceso de cambio.
 
 TDD te ordena tu proceso de desarrollo, el refactoring te ordena tu proceso de cambio.
+
+## Episodio 15 - Buenos Aires vs. (London vs. Chicago) - Parte 7
+
+Usar las anotaciones para mapear con las entidades es quizá la manera mas rápida cuando se trabaja en con Hibernate pero no es la mejor.
+
+La ventaja de tener un id distinto para la base de datos que el usado por el api rest, es que permite ocultar el primero del publico y es un poco más seguro.
+
+Programación por diferencia: subclasifico para ir poniendo en las subclases las pequeñas diferencias para no romper todos los tests. Ya cuando tengo todo funcionando, armo la jerarquía y separo. Con esta técnica tengo todos los tests pasando.
+
+Cualquier cosa que esta no sepa responder la responde el padre (ya que subclasifique el sistema). De esta manera cada pequeño cambio en las subclases me explota muy pocos tests y no todos. Que explote a medida que lo voy haciendo.
+
+Trabajamos sobre el sistema ya que es lo que se persiste, no sobre la interface.
+
+Si Java tuviera polimorfismo a nivel de clases nos evitaríamos muchos de los problemas que tenemos al trabajar con estáticos.
+
+El código que no se ejecuta en producción no tiene que estar 100% testeado. Si hay algún problema lo vas a tener vos y no el cliente.
+
+Para evitar tener información compartida entre tests y que no sean frágiles, se puede reiniciar toda la estructura de la base de datos cada test.
+
+En sistemas pequeños, cada petición puede tener su sesión de base de datos y es bastante simple trabajar así.
+
+Es mejor configurar todo lo relacionado a la sesión y transacción lo mas arriba que se pueda del árbol, para no acoplar el modelo a estas cosas.
+
+No es problema de los objetos del modelo saber si están en una transacción o no.
+
+ORMs como hibernate se encargan de no abrir la conexión hasta que no sea necesario, hasta el momento de hacer commit por lo cual no hay problema con que esto este arriba en el árbol.
+
+Difieren todo el tema persistente.
+
+Cuando se tienen transacciones de negocio muy largas (no se pueden hacer en una única transacción de base de datos), esta bien tener transacciones mas pequeñas de los pasos realizados (así lo hace Amazon).
+
+Se pueden modelar de manera distinta, una petición de transacción diferente a una transacción confirmada.
+
+Alan Kay dijo que no usaría Smalltalk.
+
+Gemstone es un smalltalk distribuido, concurrente y transaccional.
+
+A diferencia de una base de datos relacional, la transaccionalidad la maneja usando memoria transaccional. Nunca hay bloqueo, se trabaja siempre con copias y solo se verifica en el commit. Te evitas muchos problemas de concurrencia.
+
+Muchas de las complejidades que tenemos hoy en día son problemas tecnológicos y no de negocio.
+
+Para evitar las anotaciones en Java del ORM se podría tener otra clase que se encargue del mapeo, así la clase se podría mapear de distintas maneras.
+
+Cuando tienes las anotaciones en la clase solo existe una manera de mapear. Lo que no tiene mucho sentido es mapear DTOs a las clases de modelo y viceversa. Es una complejidad innecesaria.
+
+El null safe operator de otros lenguajes a la final esconde los null a pesar de que sigue existiendo, lo ideal sería no usar nulls. Lo único que hace este operador es evitar un if. El problema esta por otro lado, no hay que usar nulls.
