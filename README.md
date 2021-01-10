@@ -305,3 +305,112 @@ Lo que inicialmente nos parece un caso de prueba puede convertirse en dato de pr
 Inducción: pasa para 1, pasa para N, pasa para N+1
 
 Inducción incorrecta: pasa para 1, pasa para 2, pasa para N
+
+## Episodio 8 - Buenos Aires vs. (London vs. Chicago)
+
+London vs Chicago: serie de videos grabados por Sandro Mancuso y Bob Martin
+
+London Way (Libro: Growing Object-Oriented Software, Guided by Tests):
+
+* "Test unitarios" que mockean todo lo que no se testea directamente
+* Se empieza desde el tope del árbol de ejecución (interfaces)
+* Los tests definen como debe ser las implementación -> Hay que tener la idea de como implementarlo de entrada
+
+Conclusiones - Diseño:
+* Diseño orientado al problema computable, no al negocio
+* Organización del proyecto en base al problema computable
+* Uso de DTOs para comunicación entre "capas"
+* Sobre uso de Json
+* Uso de ids en vez de objetos
+* 5 clases para registrar un usuario...
+* Se expone la password a objetos externos
+
+Bob Martin: Java es un lenguaje procedural orientado a objetos (enfoques puros no existen)
+
+Conclusiones - Tests:
+* Test de api de caja blanca (solo lo podes hacer así si ya sabes como vas a hacer la implementación)
+* Los tests siguen la misma estructura
+* Hay casos sin testear (Usuario con username vacio, Se puede usar followers y followees que no existen, podes seguirte a vos mismo, etc)
+
+Frases
+* "I don't like to use classes that are not mine"
+* "We are using the mocking to design the behavior" Ya conoce lo que quiere hacer
+* "Mocking is not about testing, it is about designing the collaboration between classes" Las clases no colaboran, los objetos si
+* "Mocking tests are couple to implementation" 
+
+Hechos
+* 11 minutos en escribir el primer test. Clases: UserAPI, UserService, RegistrationData, User
+* 4 minutos para hacerlo pasar
+
+Chicago Way:
+* Crear clases que representen los casos de uso (CreateUser, Login, GetUsers, etc)
+* Escribir tests en base a las clases de casos de uso
+* No empezar por las interfaces
+* No usar mocking
+* Estilo "mas procedural" de solución
+
+Conclusiones - Diseño:
+* Clases que representan casos de uso
+* Una clase x Api
+* UseCaseContext, ApiContext -> Objetos globales
+* DTOs para comunicación entre "capas" (CreateUserRequest igual a User)
+* Uso de variables de instancia
+* Clases sin comportamiento (estructuras de datos)
+* Clases con un solo método que únicamente forwardean mensaje
+* Inconsistencia en el manejo de casos de error (A veces levanta excepción. A veces retorna boolean)
+* Copia de objetos debido a no ser inmutables
+* Se expone la password a objetos externos, que además es publica
+* No hay clases "service"
+
+Conclusiones - Tests:
+* Test de Excepciones sin aserciones de que no sucedió lo que no tenia que pasar
+* SetUp muy grande (no es solo setup, hace exercise)
+* Se puede postear con palabras inapropiadas
+* Hay casos sin testear (Usuario con username vacio, Si follower o followee no existe lo relaciona con null, podes seguirte a vos mismo, etc)
+
+Frases:
+* "We have tested that the assignment operator works"
+* "I use data structure without constructors because they tend to grow"
+
+Hecho:
+La primera vez que corre tests, son 2 tests juntos y pasan de entrada
+
+Buenos Aires Way:
+* Empezar testeando y modelando el negocio
+* Dejar interfaces para el final
+* Usar metáforas para concretizar el negocio
+* Diseñar objetos con heurísticas vistas hasta ahora
+
+Concepto de tecnología perfecta: Poder pensar en el negocio mas allá de la tecnología, dejando el problema de la tecnología para mas adelante (no preocuparse de entrada por la memoria o procesador)
+
+A nivel de arquitectura: no empezar por las interfaces para evitar tener lógica en las interfaces o código repetido. Ser agnósticos a cualquier interfaz
+
+Es normal tener código que solo se utiliza en los tests, ya que estos utilizan el modelo al igual que cualquier interfaz
+
+No importa si este código no se usa en producción, actualmente no es algo critico esa memoria de mas. Los test son nuestros primeros usuarios y si necesitan algún código se debe agregar
+
+Lo que no se debe hacer es cambiar métodos privados a públicos para acceder desde el test
+
+TDD: Es una técnica de programación, no de testing. Si no vamos a diseñar mientras hacemos TDD, entonces para que lo hacemos? es un problema común en el enfoque de Mancuso y Bob Martin, se enfocan mas en los tests que en el diseño.
+
+Definir si usar el inside-out o out-in puede depender en cuanto conoces el negocio. Lo ideal seria iniciar en el medio. Ni empezar por el detalle ni por lo mas abstracto
+
+En Java privado no es al objeto, significa privado a la clase (pierde sentido el encapsulamiento)
+
+Ser consiente desde el punto de vista de los baby steps en dar los pasos mas que pequeños posibles (no hacer tests muy grandes de entrada)
+Crear copias de colecciones al retornar para asegurar encapsulamiento (no te lo modifican desde afuera)
+
+Usar TDD como mecanismo de modelado del problema, pero también lo puedes usar como mecanismo de implementación de la api (usar TDD para todo)
+
+Respecto la metodología
+* Diseño basado en el negocio
+* Se pudo resolver el problema sin mocks ni clases ficticias (use cases)
+* Se usaron objetos completos, válidos, inmutables y sin null
+* No se rompió el encapsulamiento
+* No fue necesario usar DTOs, Json, etc
+* No fue necesario usar ids entre los objetos de negocio
+* Por concentrarnos en el negocio, detectamos mas casos de error
+
+Es muy fácil criticar, es muy difícil hacer. Para los programadores es muy fácil criticar el código hecho por otras personas porque no conocemos el contexto
+
+La critica objetiva no existe, uno critica siempre desde lo subjetivo. Lo importante es que esa subjetividad se construya con tiempo, experiencia, estudio... es una subjetividad entrenada
