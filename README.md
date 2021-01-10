@@ -362,7 +362,7 @@ Conclusiones - Diseño:
 * Se expone la password a objetos externos, que además es publica
 * No hay clases "service"
 
-![Screenshot](/screenshots/Episodio 8 - 1.jpg)
+![](https://github.com/jpoh97/disenio-a-la-gorra/blob/main/screenshots/Episodio%208%20-%201.jpg)
 
 Conclusiones - Tests:
 * Test de Excepciones sin aserciones de que no sucedió lo que no tenia que pasar
