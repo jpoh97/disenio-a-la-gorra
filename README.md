@@ -716,3 +716,132 @@ This the perspective we invented!
 Why we are using tools that are pushing you to have bad habits?
 
 The tools we use can define us!
+
+## Episodio 17 - Excepciones y Adios!
+
+Al manejar códigos de error para retornar excepciones (old way) se mezcla la lógica de lo que quiero hacer con la lógica de manejar dichos códigos. Desde el punto de vista de diseño se tiene código repetido.
+
+![](https://github.com/jpoh97/disenio-a-la-gorra/blob/main/screenshots/Episodio%2017%20-%201.jpg)
+
+Además se propaga este manejo en toda la cadena de llamado.
+
+Problemas:
+* Código repetido -> problema de diseño
+* Propenso a error -> Nos podemos olvidar de poner el if isError
+* Difícil de leer que se quiere hacer por mezclar el código de adm. de error
+* No esta estandarizado (salvo en GO)
+
+Técnica para sacar código repetido: Lo muevo a un lugar, parametrizo lo que cambia, le pongo nombre y lo uso.
+
+En el catch va la condición de handleo (seria como validar el instanceOf del tipo de error).
+
+Condición de Handleo. Acoplamiento con tipo de excepción.
+
+Explicación conceptual:
+* Programación por contratos (base conceptual) -  Bertrand Meyer
+* Contratos explícitos
+* Contratos implícitos
+* Romper el contrato -> Excepción
+
+Usar la metáfora de colaboración entre seres humanos para pensar en la colaboración entre objetos. Hay contratos explícitos (contrato físico y firmado. Se define que pasa si se rompe el contrato) e implícitos (existen pero no son explícitos)
+
+Lo mismo pasa con los objetos. Hay algo que se esperaba que se hiciera en una colaboración entre objetos y no eso que se esperaba no se cumplió. La forma de avisar que el contrato no se cumplió es por medio de una excepción.
+
+Definición de contratos en objetos:
+* Pre-Condiciones
+* Post-Condiciones
+* Invariantes
+
+Precondiciones:
+* Condiciones que se deben mantener para ejecutar un método
+* Ej: Monto a extraer de una caja de ahorro debe ser >= 0
+* ¿Quién debe verificarlas?
+
+Postcondiciones:
+* Condiciones que se deben mantener después de ejecutar un método
+* Ej: En una extracción: saldo = prev(saldo) - montoAExtraer
+* Ej: En un alg de sorting: La colección esta ordenada
+* Cuando se verifican: 
+Soporte explicito del lenguaje (ej. Eiffel)
+Tests
+
+Invariantes:
+* Condiciones que siempre se deben mantener en las instancias de una clase
+* Ej: Monto a extraer de una caja de ahorro debe ser >= 0
+* Cuando se verifican: 
+Soporte explicito del lenguaje (ej. Eiffel)
+Tests
+
+Puede que por cuestión implementativa una invariante no se mantenga cuando recibe un mensaje de la misma clase. Se deben mantener hacia afuera de la clase.
+
+En los tests verificamos las post-condiciones e invariantes de lo que se hizo a través de los asserts.
+
+Haciendo tests random se pueden descubrir varios errores en el código (mosca en una botella buscando agujero).
+
+Uso de excepciones:
+
+¿Quién debe verificar que el contrato se cumpla?
+¿Quién generalmente las informa?
+¿Quién principalmente debe handlearlas?
+¿Cómo se puede handlearlas?
+¿Qué excepción informar?
+
+¿Quién debe verificar que el contrato se cumpla?:
+
+* Escuela C:
+El objeto que envía el mensaje/función llamadora debe asegurar las pre-condiciones
+* Escuela Lisp:
+El objeto que recibe el mensaje/función llamada debe asegurar las pre-condiciones
+
+Escuela C confía en quien esta colaborando con vos. Rompo el encapsulamiento ya que empiezo a conocer detalles de implementación para realizar la pre-condición. ¿Cómo me entero si una pre-condición cambio? El proceso de cambio se hace mas propenso a error.
+
+La escuela Lisp es programación mas defensiva. No es de "maricones" hacer programación defensiva. Es algo que debemos hacer.
+
+Acoplamiento y cohesión van de la mano. Si gano cohesión pierdo acoplamiento.
+
+El objeto que descubre un problema es el que lo debe informar y no el que manda el mensaje. Esto favorece la escuela Lisp.
+
+Tiene mejor performance la escuela C ya que no tengo que verificar estas pre-condiciones todo el tiempo, pero hoy en día ya no es un problema.
+
+¿Quién generalmente las informa?
+
+![](https://github.com/jpoh97/disenio-a-la-gorra/blob/main/screenshots/Episodio%2017%20-%202.jpg)
+
+¿Quién principalmente debe handlearlas?
+
+![](https://github.com/jpoh97/disenio-a-la-gorra/blob/main/screenshots/Episodio%2017%20-%203.jpg)
+
+¿Cómo se puede handlearlas?
+
+En implementaciones "cerradas":
+* Terminar el bloque donde se genero la excepción (bloque del try)
+* Pasar la excepción al siguiente handler
+
+En implementaciones "abiertas":
+* Terminar el bloque donde se genero la excepción 
+* Pasar la excepción al siguiente handler
+* Reintentar el bloque que genero la excepción
+* Continuar con la siguiente colaboración
+
+Las herramientas en nuestra manera de pensar (los retry de Smalltalk que no tienen los demás lenguajes).
+
+¿Qué excepción informar?
+
+* Un tipo de excepción por cada condición. Ej: IndexOutOfBounds, InvalidBalance, InvalidName, etc
+* La misma excepción siempre, no importa condición de error. Ej: Usar siempre RuntimeException (Java), Error (Smalltalk)
+* Un mix
+
+Casi siempre lo único que cambia es el nombre de la clase, por lo general no tenemos nada implementado en particular por cada tipo de excepción.
+
+No cambia el comportamiento. Puede agregar mas semantica pero no es tan importante, o deberia crear implementaciones de dictionary cada que lo use. El que define el rol es el nombre del objeto y no de la clase.
+
+Usar un mix
+
+* Lo que determina la necesidad de existir de un tipo de excepción es si la handleo o no
+* Esto se debe al acoplamiento que existe en la condición de handleo (catch/on)
+* Solo crear nuevos tipos de excepciones si se los va a handlear
+-> Depende del tipo de software under dev
+* Ampliar la condición de handler
+-> ej. CuisSmalltalk
+
+Si el software es propio puedo crear las excepciones en demanda, si es una librería quizá deba crear excepciones adicionales por si alguno se le ocurre handlear cosas que no se nos habían ocurrido
