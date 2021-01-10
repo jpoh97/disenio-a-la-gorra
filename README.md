@@ -688,3 +688,31 @@ Para evitar las anotaciones en Java del ORM se podría tener otra clase que se e
 Cuando tienes las anotaciones en la clase solo existe una manera de mapear. Lo que no tiene mucho sentido es mapear DTOs a las clases de modelo y viceversa. Es una complejidad innecesaria.
 
 El null safe operator de otros lenguajes a la final esconde los null a pesar de que sigue existiendo, lo ideal sería no usar nulls. Lo único que hace este operador es evitar un if. El problema esta por otro lado, no hay que usar nulls.
+
+## Episodio 16 - Moldable Software by Tudor Girba
+
+Only by changing the way we look at something we can affect the way we relate to them.
+
+Everything in a software system is related to data. Programs are data and data doesn't have a shape. We decide how they look like but that choice is an engineering skill.
+
+The shape of software is something we should be paying very careful attention to.
+
+If you take 2 systems that are using the same stack and technology, they are going to produce different structures inside. 
+
+Because of this contextual nature of software, we can't predict the specific problems you will have.
+
+The way software evolves is complex!
+
+Ask yourself every time you use a tool: Is this the tool that we really want to use? What is the perfect tool that I would like to use? How would the perfect experience look like for this specific problem?
+
+If something is generic, it captures what is common between different systems. It doesn't capture what is valuable because the value is always contextual.
+
+Most reading effort (reading code) is actually being spent on people trying to find the places that are worth being read and only afterward are being spent on actually reading those places that are worth being read.
+
+It's not reading problems, it's a search problem!
+
+This the perspective we invented!
+
+Why we are using tools that are pushing you to have bad habits?
+
+The tools we use can define us!
