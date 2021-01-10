@@ -558,3 +558,43 @@ Los tests de programadores son los tests que escribimos como programadores hacie
 Son tests mas lentos y que abarcan mas, y que por lo general no lo escribe un programador. Tienen como objetivo asegurarse que la funcionalidad desde el punto de vista del usuario es correcta. 
 
 El objetivo de los tests de programador es asegurarse que el código funciona
+
+## Episodio 13 - Buenos Aires vs. (London vs. Chicago) - Parte 5
+
+TDD nos permite diseñar un objeto antes de implementarlo. Lo diseño desde la necesidad.
+
+Algunas abstracciones tienen que ver mas con el conocimiento/experiencia que tenga el desarrollador y no con la técnica. Se puede aplicar TDD pero tener toda la lógica en el controller debido a la débil capacidad de abstracción. No importa si se usa outside-in o inside-out.
+
+Cuestiones de experiencia de diseño.
+
+Kent Beck: Cuando me paro del escritorio, para saber que tengo que hacer cuando vuelva dejo un test fallando.
+
+Esta bien tener objetos distintos para retornar en el api y que no sean los mismos del dominio, así nos desacoplamos
+
+En el enfoque outside-in puede pasar que necesitemos cosas que no pertenecen al dominio desde muy temprano, por ejemplo los ids de base de datos.
+
+La identidad del objeto debe estar ligada al ciclo de vida del objeto, por lo tanto es normal instanciarlo en el constructor.
+
+El id en el ORM es problema del ORM y no del objeto. Estos ids no son necesarios para el objeto, la identidad viene dada por el hecho de ser objeto. Solo es necesario porque va a ser usado en el mundo externo como un puntero al objeto.
+
+El constructor debe verificar que se creen objetos completos mas que asignar ids. Usarlo así es muy cómodo, pero lo que debe evitar es usarlo en el modelo. Es algo que pasa en la implementación London y Chicago que en vez de trabajar con objetos usan ids.
+
+El problema de las bases de datos relacionales es otro, es un problema tecnológico. El verdadero id del objeto es transparente para el desarrollador, y no tiene nada ver con el id de la base de datos. Si tenes que hacer una chambonada, que sea una chambonada orientada a objetos!
+
+Alan Kay: Podemos llamar a las clases de una manera distinta a la que nos ofrecen los frameworks en general (ejemplo: Controller). Debemos ir mas allá de los estereotipos que nos ofrecen los frameworks.
+
+Outside-in (escuela London) viene con un uso obsesivo de mocks, sin embargo la técnica se puede aplicar sin necesidad de usar mocks.
+
+Con esta técnica puede llegar a pasar que encontremos casos funcionales que no están cubiertos (a pesar de que el coverage sea 100%)
+
+Para definir cual técnica usar, debemos cuestionar en donde están las incertidumbres del sistema a modelar. Aplicando XP, debemos buscar el estrés pronto y no al final. Si tenes incertidumbre sobre la arquitectura (o el working skeleton) es una buena opción usar outside-in
+
+El modelo debe prestar un servicio dentro de un ecosistema mas grande, esta es una de las razones para usar outside-in. Se toma en cuenta todo el ecosistema del diseño.
+
+No estoy diseñando en términos del dominio, estoy descubriendo la arquitectura. Se acopla mucho a la accidentalidad de lo que se esta pidiendo.
+
+Configurar un framework es un trabajo repetitivo. Normalmente la mayor incertidumbre es entender el dominio de negocio.
+
+A la final es lo que genera mayor valor al cliente. Es lo más cambiante. Es fácil perderse cuando se sigue esta técnica outside-in ya que es fácil desviarse por otras ramas, para esto es importante tener un trace bullet y no perder el foco.
+
+La tecnica a escoger, sea outside-in (London) o inside-out (Chicago) o middle-out (Buenos Aires) depende de la necesidad de negocio particular. Que nos interesa más: el negocio, la base de datos, el frontend? Desde allí debemos partir
