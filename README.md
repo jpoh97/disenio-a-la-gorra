@@ -45,3 +45,38 @@ Heurísticas:
 4. Usar una metáfora para "mappear" el problema (no usar nombres de patrones en las clases)
 5. Modelar los "conjuntos" de objetos (Distintas implementaciones del "conjunto")
 6. Usar updates atómicos
+
+## Episodio 4 - No usar null
+
+Heurística 6: *No usar* null/nil (es un objeto que representa más de un ente de la realidad)
+
+Tip: Representar la nada especializada por medio de null object o encapsular que puede ser null con optional o explicit absent message
+
+¿Cuándo usar cada uno?
+Sistema nuevo y sé que puede ser "null"
+
+Leng. Dinámicamente tipado:
+1. Explicit Absent Message
+2. Null Object
+
+Leng. Estáticamente tipado:
+1. Optional
+2. Null Object
+
+Sistema existente, no podía ser "null" y ahora si:
+
+Leng. Dinámicamente tipado:
+1. Null Object
+2. Explicit Absent Message
+
+Leng. Estáticamente tipado:
+1. Null Object
+2. Optional
+
+Sistema existente, se rompió encapsulamiento y hay chequeo por null en todos lados
+
+Leng. Dinámica tipado: 
+1. Explicit Absent Message y a arreglar todo!
+
+Leng. Estáticamente tipado:
+1. Optional y a arreglar todo!
